@@ -1,0 +1,9 @@
+*.pyc
+*~
+tmp/
+__pycache__
+db.sqlite3
+*.DS_Store
+website/settings_secret.py
+migrations/
+.htaccess
