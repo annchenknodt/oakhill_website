@@ -1,5 +1,4 @@
 from django.db import models
-from phone_field import PhoneField
 
 class Contact(models.Model):
 	name_last=models.CharField(max_length=50,default='')
