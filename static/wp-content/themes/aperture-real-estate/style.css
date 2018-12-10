@@ -235,6 +235,7 @@ button,
 [type="reset"],
 [type="submit"] {
 	-webkit-appearance: button;
+	cursor:pointer;
 }
 
 /**
@@ -644,6 +645,7 @@ h1.entry-title {
 #masthead {
 	text-align: center;
 	margin-bottom: 1em;
+	margin-top: 1em;
 }
 .site-branding h1,
 .site-branding h1 a {

@@ -111,3 +111,7 @@ print(BASE_DIR)
 print(os.path.dirname(BASE_DIR))
 print(STATIC_ROOT)
 
+EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
+EMAIL_PORT = 587  # Gmail SMTP port for TLS
+EMAIL_USE_TLS = True    
+
