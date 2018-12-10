@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'phone_field',
+    'crispy_forms',
+    'contacts',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +58,10 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'contacts/templates',
+            'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,3 +121,9 @@ USE_TZ = True
 # in settings_secret
 #STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.dirname(BASE_DIR) + '/public/static/'
+
+print('!!!!!!!!!!')
+print(BASE_DIR)
+print(os.path.dirname(BASE_DIR))
+print(STATIC_ROOT)
+
