@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import datetime
+from pytz import timezone
 
 class Contact(models.Model):
 	name_last=models.CharField(max_length=50,default='')
@@ -10,6 +12,8 @@ class Contact(models.Model):
 	address_city=models.CharField(max_length=50,default='')
 	address_state=models.CharField(max_length=20,default='')
 	address_zip=models.CharField(max_length=5,default='')
+	date_submitted=models.DateTimeField(default=datetime.now(timezone('America/Chicago')))
+	status=models.CharField(max_length=50,default='')
 
 
 
