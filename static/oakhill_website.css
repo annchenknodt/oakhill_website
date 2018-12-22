@@ -17,15 +17,24 @@ legend{
     display: none;
 }
 /* To get input box to span column width */
-input[type=text] { 
+input[type=text], input[type=email] { 
     width: 100%; 
     box-sizing: border-box; 
     /*height: 28px; */
 }
 
+/* To get contact form submit button centered */
+.buttonHolder, input[type=submit] { 
+    margin: auto !important;
+    width: 50%;
+}
+input[type=submit] { 
+    width: 100%;
+}
+
 /* To get form centered */
 form {
-    width: 800px;
+    width: 600px;
     margin: auto;
 /*    box-sizing: border-box !important;*/
 }
