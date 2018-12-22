@@ -15,6 +15,9 @@ class Contact(models.Model):
 	date_submitted=models.DateTimeField(default=datetime.now(timezone('America/Chicago')))
 	status=models.CharField(max_length=50,default='')
 
+	def __str__(self):
+		return '_'.join(self.name_last,self.name_first,self.addres_st1)
+
 
 
 
