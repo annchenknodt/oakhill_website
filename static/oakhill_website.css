@@ -16,11 +16,18 @@ legend{
 .asteriskField {
     display: none;
 }
+/* To get input box to span column width */
+input[type=text] { 
+    width: 100%; 
+    box-sizing: border-box; 
+    /*height: 28px; */
+}
 
+/* To get form centered */
 form {
     width: 800px;
     margin: auto;
-    box-sizing: border-box !important;
+/*    box-sizing: border-box !important;*/
 }
 
 .form-horizontal {

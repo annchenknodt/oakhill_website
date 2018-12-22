@@ -18,8 +18,8 @@ class InputForm(forms.ModelForm):
 			"address_zip": "Zip Code",
 		}
 	def __init__(self, *args, **kwargs):
-		super(InputForm, self).__init__(*args, **kwargs)
-		self.helper = FormHelper(self)
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
 		self.helper.form_action = ""
 		self.helper.form_method = "POST"
 		# self.helper.field_class = 'col-sm-4'
@@ -36,37 +36,65 @@ class InputForm(forms.ModelForm):
 		self.fields['address_state'].help_text = "State"
 		self.fields['address_zip'].help_text = "Zip Code"
 		self.helper.layout = layout.Layout(
-			layout.Fieldset(
-				_("Name"),
-				layout.Div(
-					layout.Div("name_last", css_class="col-xs-6"),
-					layout.Div("name_first", css_class="col-xs-6"),
-					css_class='row-fluid',
-				),	
-			),	
-			layout.Fieldset(
-				_("Email"),
-				layout.Field("email"),
-			),	
-			layout.Fieldset(
-				_("Phone Number"),
-				layout.Field("phone"),
-			),	
-			layout.Fieldset(
-				_("Property Address"),
-				layout.Div("address_st1",placeholder="Street Line 1"),
-				layout.Div("address_st2",placeholder="Street Line 2"),
-				layout.Div(   	
-					layout.Div("address_city", css_class="col-xs-4",placeholder="City"),
-					layout.Div("address_state", css_class="col-xs-4",placeholder="State"),
-					layout.Div("address_zip", css_class="col-xs-4",placeholder="Zip Code"),
-					css_class='row-fluid',
-				),
+			layout.Row(
+				layout.Column("name_last",css_class='form-group col-lg-6 mb-0'),
+				layout.Column("name_first",css_class='form-group col-lg-6 mb-0'),
+				css_class='form-row'
 			),
+			# 'address_st1',
+			# 'address_st2',
+			layout.Row(
+				layout.Column("address_st1",css_class='form-group col-lg-12 mb-0'),
+				css_class='form-row'
+			),
+			layout.Row(
+				layout.Column("address_st2",css_class='form-group col-lg-12 mb-0'),
+				css_class='form-row'
+			),			
+			#layout.Row("address_st2",css_class='form-row col-lg-12 mb-0'),
+			layout.Row(
+				layout.Column("address_city",css_class='form-group col-lg-6 mb-0'),
+				layout.Column("address_state",css_class='form-group col-lg-4 mb-0'),
+				layout.Column("address_zip",css_class='form-group col-lg-2 mb-0'),
+				css_class='form-row'
+			),		
 			bootstrap.FormActions(
 				layout.Submit('submit', _('Get an offer')),
-			)
-        )
+			)				
+		)
+
+		# self.helper.layout = layout.Layout(
+		# 	layout.Fieldset(
+		# 		_("Name"),
+		# 		layout.Div(
+		# 			layout.Div("name_last", css_class="col-xs-6"),
+		# 			layout.Div("name_first", css_class="col-xs-6"),
+		# 			css_class='row-fluid',
+		# 		),	
+		# 	),	
+		# 	layout.Fieldset(
+		# 		_("Email"),
+		# 		layout.Field("email"),
+		# 	),	
+		# 	layout.Fieldset(
+		# 		_("Phone Number"),
+		# 		layout.Field("phone"),
+		# 	),	
+		# 	layout.Fieldset(
+		# 		_("Property Address"),
+		# 		layout.Div("address_st1",placeholder="Street Line 1"),
+		# 		layout.Div("address_st2",placeholder="Street Line 2"),
+		# 		layout.Div(   	
+		# 			layout.Div("address_city", css_class="col-xs-4",placeholder="City"),
+		# 			layout.Div("address_state", css_class="col-xs-4",placeholder="State"),
+		# 			layout.Div("address_zip", css_class="col-xs-4",placeholder="Zip Code"),
+		# 			css_class='row-fluid',
+		# 		),
+		# 	),
+		# 	bootstrap.FormActions(
+		# 		layout.Submit('submit', _('Get an offer')),
+		# 	)
+  #       )
 
 # class InputForm(forms.ModelForm):
 # 	class Meta:
