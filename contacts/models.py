@@ -16,7 +16,7 @@ class Contact(models.Model):
 	status=models.CharField(max_length=50,default='')
 
 	def __str__(self):
-		return '_'.join(self.name_last,self.name_first,self.addres_st1)
+		return '_'.join(self.name_last,self.name_first,self.address_st1)
 
 
 
