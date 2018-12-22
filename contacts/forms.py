@@ -27,6 +27,7 @@ class InputForm(forms.ModelForm):
 		self.fields['name_last'].help_text = "Last Name"
 		self.fields['name_first'].help_text = "First Name"
 		self.fields['email'].help_text = "Email Address"
+		self.fields['phone'].help_text = "Phone Number"
 		self.fields['address_st1'].help_text = "Street Line 1"
 		self.fields['address_st2'].help_text = "Street Line 2"
 		self.fields['address_city'].help_text = "City"
@@ -41,7 +42,8 @@ class InputForm(forms.ModelForm):
 					css_class='form-row'
 				),
 				layout.Row(
-					layout.Column("email",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("email",css_class='form-group col-lg-6 mb-0'),
+					layout.Column("phone",css_class='form-group col-lg-6 mb-0'),
 					css_class='form-row'
 				),
 			),
@@ -66,5 +68,6 @@ class InputForm(forms.ModelForm):
 				layout.Submit('submit', _('Get an offer')),
 			)				
 		)
+
 
            

@@ -34,7 +34,8 @@ def getContact(request):
 			return render(request, 'confirmation.html')	
 
 		else:
-			print("NAY")
+			print("FORM INVALID")
+			print(form.errors)
 			val=0
 
 	else:
