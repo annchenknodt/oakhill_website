@@ -12,6 +12,7 @@ class Contact(models.Model):
 	address_city=models.CharField(max_length=50,default='')
 	address_state=models.CharField(max_length=20,default='')
 	address_zip=models.CharField(max_length=5,default='')
+	comments=models.TextField(default='',blank=True)
 	date_submitted=models.DateTimeField(default=datetime.now(timezone('America/Chicago')))
 	status=models.CharField(max_length=50,default='')
 

@@ -7,16 +7,16 @@ from .models import Contact
 class InputForm(forms.ModelForm):
 	class Meta:
 		model=Contact
-		fields=['name_last','name_first','email','phone','address_st1','address_st2','address_city','address_state','address_zip']
-		labels={
-			"name_last": "Last Name",
-			"name_first": "First Name",
-			"address_st1": "Street Line 1",
-			"address_st2": "Street Line 2",
-			"address_city": "City",
-			"address_state": "State",
-			"address_zip": "Zip Code",
-		}
+		fields=['name_last','name_first','email','phone','address_st1','address_st2','address_city','address_state','address_zip','comments']
+		# labels={
+		# 	"name_last": "Last Name",
+		# 	"name_first": "First Name",
+		# 	"address_st1": "Street L 1",
+		# 	"address_st2": "Street Line 2",
+		# 	"address_city": "City",
+		# 	"address_state": "State",
+		# 	"address_zip": "Zip Code",
+		# }
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.helper = FormHelper()
@@ -61,6 +61,13 @@ class InputForm(forms.ModelForm):
 					layout.Column("address_city",css_class='form-group col-lg-6 mb-0'),
 					layout.Column("address_state",css_class='form-group col-lg-4 mb-0'),
 					layout.Column("address_zip",css_class='form-group col-lg-2 mb-0'),
+					css_class='form-row'
+				),		
+			),
+			layout.Fieldset(
+				_("Additional Comments"),
+				layout.Row(
+					layout.Column("comments",css_class='form-group col-lg-12 mb-0'),
 					css_class='form-row'
 				),		
 			),
