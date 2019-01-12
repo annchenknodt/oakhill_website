@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'crispy_forms',
+    'templatetag_handlebars',
+    'graphos',    
     'contacts',
+    'bootstrapform',    
+    'rental',
 ]
 
 MIDDLEWARE = [
@@ -106,10 +111,6 @@ USE_TZ = True
 #STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.dirname(BASE_DIR) + '/public/static/'
 
-print('!!!!!!!!!!')
-print(BASE_DIR)
-print(os.path.dirname(BASE_DIR))
-print(STATIC_ROOT)
 
 EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
 EMAIL_PORT = 587  # Gmail SMTP port for TLS

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
+from website.forms import LoginForm
+from django.contrib.auth.views import login, logout
 from .staticserve import serve
 
 urlpatterns = [
@@ -24,5 +26,8 @@ urlpatterns = [
     path('faqs/', TemplateView.as_view(template_name='FAQs.html'),name="faqs"),    
     path('admin/', admin.site.urls),
     path('contact/', include('contacts.urls')),
+    path('rental/', include('rental.urls')),  
+    path('login/', login, {'template_name': 'registration/login.html', 'authentication_form': LoginForm}, name='login'), # not sure why i had to remove name='login' here???
+    path('logout/', logout, name='logout'),   
     re_path(r'^static/(?P<path>.*)$', serve),
 ]
