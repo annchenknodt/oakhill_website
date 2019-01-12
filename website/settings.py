@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = '' # in settings_secret.py
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True # in settings_secret
 
 ALLOWED_HOSTS = ['www.oakhillhomesolutions.com','127.0.0.1','69.163.224.179','oakhillhomesolutions.com']
 
