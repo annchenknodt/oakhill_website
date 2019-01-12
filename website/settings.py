@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.oakhillpropertiestx.com','127.0.0.1','69.163.224.179','oakhillpropertiestx.com']
+ALLOWED_HOSTS = ['www.oakhillhomesolutions.com','127.0.0.1','69.163.224.179','oakhillhomesolutions.com']
 
 
 # Application definition
