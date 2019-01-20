@@ -22,11 +22,12 @@ def getContact(request):
 			'Name: '+data['name_first']+" "+data['name_last'],
 			'Email: '+data['email'],
 			'Phone: '+data['phone'],
-			'Address: '+data['address_st1']+" "+data['address_st2']+" "+data['address_city']+" "+data['address_state']+" "+data['address_zip']
+			'Address: '+data['address_st1']+" "+data['address_st2']+" "+data['address_city']+" "+data['address_state']+" "+data['address_zip'],
+			'Comments: '+data['comments']
 			])
 
 			try:
-				send_mail('Oak Hill Properties form submission', message, 'aknodt@gmail.com', ['aknodt@gmail.com','annchovies14@hotmail.com','tknodt@gmail.com'], fail_silently=True)
+				send_mail('Oak Hill Properties form submission', message, 'aknodt@gmail.com', ['info@oakhillhomesolutions.com'], fail_silently=True)
 			except:
 				fh=open('/home/annkno3/oakhillpropertiestx.com/notification_errors.txt','a')
 				write(message)
