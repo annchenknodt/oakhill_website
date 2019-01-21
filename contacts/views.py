@@ -27,7 +27,7 @@ def getContact(request):
 			])
 
 			try:
-				send_mail('Oak Hill Properties form submission', message, 'aknodt@gmail.com', ['info@oakhillhomesolutions.com'], fail_silently=True)
+				send_mail('Oak Hill Home Solutions form submission', message, 'aknodt@gmail.com', ['aknodt@gmail.com','tknodt@gmail.com'], fail_silently=True)
 			except:
 				fh=open('/home/annkno3/oakhillhomesolutions.com/notification_errors.txt','a')
 				fh.write(message)
