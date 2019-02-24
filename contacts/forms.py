@@ -2,7 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms import layout, bootstrap
 from django.utils.translation import ugettext_lazy as _, ugettext
-from .models import Contact
+from .models import Contact, Unsubscribe
 
 class InputForm(forms.ModelForm):
 	class Meta:
@@ -76,5 +76,42 @@ class InputForm(forms.ModelForm):
 			)				
 		)
 
-
+class UnsubForm(forms.ModelForm):
+	class Meta:
+		model=Unsubscribe
+		fields=['address_st1','address_st2','address_city','address_state','address_zip']
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.form_action = ""
+		self.helper.form_method = "POST"
+		self.helper.form_show_labels = False		
+		self.helper.form_class = 'form-horizontal'
+		self.fields['address_st1'].help_text = "Street Line 1"
+		self.fields['address_st2'].help_text = "Street Line 2"
+		self.fields['address_city'].help_text = "City"
+		self.fields['address_state'].help_text = "State"
+		self.fields['address_zip'].help_text = "Zip Code"
+		self.helper.layout = layout.Layout(
+			layout.Fieldset(
+				_("Mailing Address"),
+				layout.Row(
+					layout.Column("address_st1",css_class='form-group col-lg-12 mb-0'),
+					css_class='form-row'
+				),
+				layout.Row(
+					layout.Column("address_st2",css_class='form-group col-lg-12 mb-0'),
+					css_class='form-row'
+				),			
+				layout.Row(
+					layout.Column("address_city",css_class='form-group col-lg-6 mb-0'),
+					layout.Column("address_state",css_class='form-group col-lg-4 mb-0'),
+					layout.Column("address_zip",css_class='form-group col-lg-2 mb-0'),
+					css_class='form-row'
+				),		
+			),
+			layout.ButtonHolder(
+				layout.Submit('submit', _('Unsubscribe')),
+			)				
+		)
            

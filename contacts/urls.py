@@ -23,4 +23,6 @@ urlpatterns = [
     #path('', views.home, name='index'),
     # ex: /getdata/select/
     path('', views.getContact, name='getContact'),
+    path('unsubscribe', views.unsubscribe, name='unsubscribe'),
+
 ]
