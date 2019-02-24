@@ -3,9 +3,9 @@ html{
     max-width: 1100px;
 }
 
-.site {
+/*.site {
     min-width: 600px;
-}
+}*/
 
 /* For crispy forms */
 /* To get rid of errors on number field */
@@ -43,7 +43,7 @@ input[type=submit] {
 
 /* To get form centered */
 form {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
 /*    box-sizing: border-box !important;*/
 }
