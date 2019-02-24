@@ -37,37 +37,37 @@ class InputForm(forms.ModelForm):
 			layout.Fieldset(
 				_("Contact Info"),
 				layout.Row(
-					layout.Column("name_last",css_class='form-group col-lg-6 mb-0'),
-					layout.Column("name_first",css_class='form-group col-lg-6 mb-0'),
+					layout.Column("name_last",css_class='form-group col-6 mb-0'),
+					layout.Column("name_first",css_class='form-group col-6 mb-0'),
 					css_class='form-row'
 				),
 				layout.Row(
-					layout.Column("email",css_class='form-group col-lg-6 mb-0'),
-					layout.Column("phone",css_class='form-group col-lg-6 mb-0'),
+					layout.Column("email",css_class='form-group col-6 mb-0'),
+					layout.Column("phone",css_class='form-group col-6 mb-0'),
 					css_class='form-row'
 				),
 			),
 			layout.Fieldset(
 				_("Property Address"),
 				layout.Row(
-					layout.Column("address_st1",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("address_st1",css_class='form-group col-12 mb-0'),
 					css_class='form-row'
 				),
 				layout.Row(
-					layout.Column("address_st2",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("address_st2",css_class='form-group col-12 mb-0'),
 					css_class='form-row'
 				),			
 				layout.Row(
-					layout.Column("address_city",css_class='form-group col-lg-6 mb-0'),
-					layout.Column("address_state",css_class='form-group col-lg-4 mb-0'),
-					layout.Column("address_zip",css_class='form-group col-lg-2 mb-0'),
+					layout.Column("address_city",css_class='form-group col-6 mb-0'),
+					layout.Column("address_state",css_class='form-group col-4 mb-0'),
+					layout.Column("address_zip",css_class='form-group col-2 mb-0'),
 					css_class='form-row'
 				),		
 			),
 			layout.Fieldset(
 				_("Additional Comments"),
 				layout.Row(
-					layout.Column("comments",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("comments",css_class='form-group col-12 mb-0'),
 					css_class='form-row'
 				),		
 			),
@@ -96,22 +96,23 @@ class UnsubForm(forms.ModelForm):
 			layout.Fieldset(
 				_("Mailing Address"),
 				layout.Row(
-					layout.Column("address_st1",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("address_st1",css_class='form-group col-12 mb-0'),
 					css_class='form-row'
 				),
 				layout.Row(
-					layout.Column("address_st2",css_class='form-group col-lg-12 mb-0'),
+					layout.Column("address_st2",css_class='form-group col-12 mb-0'),
 					css_class='form-row'
 				),			
 				layout.Row(
-					layout.Column("address_city",css_class='form-group col-lg-6 mb-0'),
-					layout.Column("address_state",css_class='form-group col-lg-4 mb-0'),
-					layout.Column("address_zip",css_class='form-group col-lg-2 mb-0'),
+					layout.Column("address_city",css_class='form-group col-6 mb-0'),
+					layout.Column("address_state",css_class='form-group col-4 mb-0'),
+					layout.Column("address_zip",css_class='form-group col-2 mb-0'),
 					css_class='form-row'
 				),		
 			),
 			layout.ButtonHolder(
 				layout.Submit('submit', _('Unsubscribe')),
+				css_class='col-12'
 			)				
 		)
            
