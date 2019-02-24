@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div id="content" class="site-content">	
+	<div id="primary" class="content-area grid-wide">
+		<main id="main" class="site-main">
+			<header class="entry-header"><h2><center>Unsubscribe</center></h2></header>
+			<div class="entry-content">
+				<center><p>We apologize for any unwanted mail.  Please enter your mailing address below to opt out of any future mailings.</p></center>
+			</div>
+		</main>
+	</div>
+</div>
+
+
+	{% crispy form %}
+
+{% endblock %}
