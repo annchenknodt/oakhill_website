@@ -27,3 +27,6 @@ class Unsubscribe(models.Model):
 	address_city=models.CharField(max_length=50,default='')
 	address_state=models.CharField(max_length=20,default='')
 	address_zip=models.CharField(max_length=5,default='')
+	
+	def __str__(self):
+		return '_'.join([self.address_st1,self.address_city])
