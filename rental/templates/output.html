@@ -1,7 +1,36 @@
 {% extends "base_analyzer.html" %}
 {% load humanize %}
 {% load index %}
+
+{% block extrahead %}
+<script type="text/javascript">
+    $(document).ready(function() {        
+    	var init_purchasePrice=parseInt("{{vals.price}}",10)+1000;
+    	var init_loanLength="{{vals.amt_years}}";
+    	var init_loanRate=0.05;//"{{vals.loan_rate}}";
+		var out_mortgage="{{vals.monthly_PI}}";
+        function update() {            
+             $purchasePrice = $("#purchasePrice").val();
+             $loanLength = $("#loanLength").val();
+             out_mortgage = $purchasePrice*(init_loanRate/12*Math.pow(1 + init_loanRate/12,$loanLength*12))/(Math.pow(1 + init_loanRate/12,$loanLength*12) - 1);
+             $('#out_mortgage').html(out_mortgage.toFixed(2));
+             // $('#purchasePrice').html(out_mortgage.toFixed(2));
+        }
+        $("#slider_purchasePrice").slider({
+            value: init_purchasePrice, max:200000, min:0, step:100,
+            slide: function(event, ui) { $("#purchasePrice").val(ui.value); update(); }    
+        });
+        $("#slider_loanLength").slider({
+            value: init_loanLength, max:30, min:0, step:1,
+            slide: function(event, ui) { $("#loanLength").val(ui.value); update(); }    
+        });
+        update();
+    });        
+</script>
+{% endblock %}
+
 {% block content %}
+
 
 <h2><center>Rental Property Analysis</center></h2>
 <h3>{{vals.title}}</h3>
@@ -30,7 +59,6 @@
 
 <div class="container-fluid col-xs-8">
 <table class="table-summary1">
-	
 	<tr class=summary1-num>
 	<td>${{vals.monthly_in|floatformat:"2"|intcomma}}</td>
 	<td>${{vals.monthly_ex|floatformat:"2"|intcomma}}</td>
@@ -38,20 +66,37 @@
 	<td>{{vals.pro_forma_cap|floatformat:"2"}}%</td>
 	</tr>
 	<tr class="summary1-text"><td>MONTHLY INCOME</td><td>MONTHLY EXPENSES</td><td>MONTHLY CASHFLOW</td><td>PRO FORMA CAP</td></tr>
-
 	<tr class=summary1-num><td>${{vals.NOI|floatformat:"2"|intcomma}}</td>
 		<td>${{vals.total_cash|floatformat:"2"|intcomma}}</td>
 		<td>{{vals.CoC_roi|floatformat:"2"}}%</td>
 		<td>{{vals.purchase_cap|floatformat:"2"}}%</td>
 	</tr>
 	<tr  class="summary1-text"><td>NOI</td><td>TOTAL CASH NEEDED</td><td>CASH ON CASH ROI</td><td>PURCHASE CAP RATE</td></tr>
-	
 </table>
 </div>
 
 <div class="container-fluid col-xs-8">
 {{ piechart.as_html }}	
 </div>
+
+<div class="container-fluid">
+<table class="table-summary1">
+	<tr><!-- <div class="row slider-row"> -->
+		<td><div>Loan Amount</div></td>
+		<td><div id="slider_purchasePrice" width="300px" ></div></td>
+		<td><div id="purchasePrice">{{vals.price}}</div></td>
+	</tr>
+	<tr><!-- <div class="row slider-row"> -->
+		<td><div>Amortized Over</div></td>
+		<td><div id="slider_loanLength" width="300px" ></div></td>
+		<td><div id="loanLength">{{vals.amt_years}}</div></td>
+	</tr>	
+	<tr><!-- <div class="row slider-row"> -->
+		<td><div>Mortgage</div></td>
+		<td><div id="out_mortgage">0</div></td>
+	</tr>		
+</table>
+</div> 
 
 <div class="container-fluid">
 <table class="table">
@@ -61,7 +106,6 @@
 			<th class="text-right">Year {{i}}</th>
 		{% endfor %}	
 	</thead>
-
 	<tr >
 		<td>Total Annual Income</td>
 		{% for i in vals.show_years_index %}
@@ -133,6 +177,7 @@
 
 <!-- <div class="container-fluid col-xs-6"> -->
 
+
 <div class="bottomchart">
 {{ linechart.as_html }}	
 </div>
@@ -148,5 +193,8 @@
 <div class="bottomchart">
 {{ cocchart.as_html }}	
 </div>
+
+
+
 
 {% endblock %}

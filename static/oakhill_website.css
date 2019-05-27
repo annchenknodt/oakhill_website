@@ -3,11 +3,6 @@ html{
     max-width: 1100px;
 }
 
-.ui-slider {
-    margin:20px;
-    width: 300px;
-}
-
 /* For crispy forms */
 /* To get rid of errors on number field */
 input[type=number]::-webkit-inner-spin-button, 
