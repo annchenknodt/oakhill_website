@@ -2,9 +2,29 @@ h1 {
     color: #000080;
 }
 
+/* slider styling from http://jsfiddle.net/209jrpas/3/*/
 .ui-slider {
-    margin: 20px;
+    margin: 10px;
+    height: 5px;
+    position: relative;
     width: 300px !important;
+    border: none;
+    background: #eaeaea;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: #01AAFE;
+    border-radius: 25px;
+    outline: none;
+    border: 2px solid #fff;
+    position: absolute;
+    top: -7px;
+}
+.slider-row{
+    display: table;
+}
+.slider-col {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .sidebar-nav {
@@ -45,8 +65,10 @@ th, td {
     padding: 4px;
     text-align: left;
 }
+table.table-summary1 td { padding-top:2px; padding-right:20px; padding-bottom:2px; padding-left:2px; }
 .summary1-text{
     color: #b4b4b4;
+    padding: 10px;
 }
 .summary1-num{
     font-size: 16pt;
@@ -55,6 +77,9 @@ th, td {
 .summary2-text{
     color: #b4b4b4;
 }
+/*tr {
+    height: 45px;
+}*/
 
 /* For crispy forms */
 /* To get rid of errors on number field */

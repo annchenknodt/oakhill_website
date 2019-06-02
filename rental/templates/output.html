@@ -5,25 +5,72 @@
 {% block extrahead %}
 <script type="text/javascript">
     $(document).ready(function() {        
-    	var init_purchasePrice=parseInt("{{vals.price}}",10)+1000;
-    	var init_loanLength="{{vals.amt_years}}";
-    	var init_loanRate=0.05;//"{{vals.loan_rate}}";
-		var out_mortgage="{{vals.monthly_PI}}";
+		var out_mortgage=parseFloat("{{vals.monthly_PI}}");
+		var out_cashFlow=parseFloat("{{vals.monthly_cf}}");
+		var out_coc=parseFloat("{{vals.CoC_roi}}");
+		var out_cashNeeded=parseFloat("{{vals.total_cash}}");
+    	var init_purchasePrice=parseInt("{{vals.price}}",10);
+    	var init_loanLength=parseInt("{{vals.amt_years}}",10);
+    	var init_loanRate=parseFloat("{{vals.loan_rate}}");
+    	var init_loanDown=parseInt("{{vals.down}}",10);
+    	var init_closingCosts=parseInt("{{vals.closing_cost}}",10);
+    	var init_repairCosts=parseInt("{{vals.repair_cost}}",10);
+    	var init_income=parseInt("{{vals.monthly_in}}",10);
+    	var init_expenses=parseFloat("{{vals.monthly_ex}}")-out_mortgage;
         function update() {            
-             $purchasePrice = $("#purchasePrice").val();
-             $loanLength = $("#loanLength").val();
-             out_mortgage = $purchasePrice*(init_loanRate/12*Math.pow(1 + init_loanRate/12,$loanLength*12))/(Math.pow(1 + init_loanRate/12,$loanLength*12) - 1);
+             $purchasePrice = parseInt($("#purchasePrice").html(),10);
+             $loanLength = parseInt($("#loanLength").html(),10);
+             $loanRate = parseFloat($("#loanRate").html()/100);
+             $loanDown = parseInt($("#loanDown").html(),10);
+             $closingCosts = parseInt($("#closingCosts").html(),10);
+             $repairCosts = parseInt($("#repairCosts").html(),10);
+             $income = parseInt($("#income").html(),10);
+             $expenses = parseFloat($("#expenses").html());
+             out_mortgage = ($purchasePrice-$loanDown)*($loanRate/12*Math.pow(1 + $loanRate/12,$loanLength*12))/(Math.pow(1 + $loanRate/12,$loanLength*12) - 1);
+             out_cashFlow = $income-$expenses-out_mortgage;
+             out_cashNeeded = $loanDown+$closingCosts+$repairCosts;
+             out_coc = out_cashFlow*12 / out_cashNeeded *100;
+             out_totalPayments = out_mortgage * $loanLength * 12;
              $('#out_mortgage').html(out_mortgage.toFixed(2));
-             // $('#purchasePrice').html(out_mortgage.toFixed(2));
+             $('#out_cashFlow').html(out_cashFlow.toFixed(2));
+             $('#out_coc').html(out_coc.toFixed(2));
+             $('#out_cashNeeded').html(out_cashNeeded.toFixed(2)); 
+             $('#out_totalPayments').html(out_totalPayments.toFixed(2)); 
         }
+        debugger;
         $("#slider_purchasePrice").slider({
             value: init_purchasePrice, max:200000, min:0, step:100,
-            slide: function(event, ui) { $("#purchasePrice").val(ui.value); update(); }    
+            slide: function(event, ui) { $("#purchasePrice").html(ui.value); update(); }    
         });
         $("#slider_loanLength").slider({
             value: init_loanLength, max:30, min:0, step:1,
-            slide: function(event, ui) { $("#loanLength").val(ui.value); update(); }    
+            slide: function(event, ui) { $("#loanLength").html(ui.value); update(); }    
         });
+        $("#slider_loanRate").slider({
+            value: init_loanRate, max:10, min:0, step:0.25,
+            slide: function(event, ui) { $("#loanRate").html(ui.value); update(); }    
+        });
+        $("#slider_loanDown").slider({
+            value: init_loanDown, max:200000, min:0, step:100,
+            slide: function(event, ui) { $("#loanDown").html(ui.value); update(); }    
+        });
+        $("#slider_closingCosts").slider({
+            value: init_closingCosts, max:10000, min:0, step:100,
+            slide: function(event, ui) { $("#closingCosts").html(ui.value); update(); }    
+        }); 
+        $("#slider_repairCosts").slider({
+            value: init_repairCosts, max:100000, min:0, step:1000,
+            slide: function(event, ui) { $("#repairCosts").html(ui.value); update(); }    
+        });   
+        $("#slider_income").slider({
+            value: init_income, max:5000, min:0, step:50,
+            slide: function(event, ui) { $("#income").html(ui.value); update(); }    
+        });  
+        $("#slider_expenses").slider({
+            value: init_expenses, max:5000, min:0, step:50,
+            create: function(event, ui) { $('#expenses').html(init_expenses.toFixed(2)); },    
+            slide: function(event, ui) { $("#expenses").html(ui.value); update(); }   
+        });  
         update();
     });        
 </script>
@@ -66,7 +113,8 @@
 	<td>{{vals.pro_forma_cap|floatformat:"2"}}%</td>
 	</tr>
 	<tr class="summary1-text"><td>MONTHLY INCOME</td><td>MONTHLY EXPENSES</td><td>MONTHLY CASHFLOW</td><td>PRO FORMA CAP</td></tr>
-	<tr class=summary1-num><td>${{vals.NOI|floatformat:"2"|intcomma}}</td>
+	<tr class=summary1-num>
+		<td>${{vals.NOI|floatformat:"2"|intcomma}}</td>
 		<td>${{vals.total_cash|floatformat:"2"|intcomma}}</td>
 		<td>{{vals.CoC_roi|floatformat:"2"}}%</td>
 		<td>{{vals.purchase_cap|floatformat:"2"}}%</td>
@@ -79,24 +127,7 @@
 {{ piechart.as_html }}	
 </div>
 
-<div class="container-fluid">
-<table class="table-summary1">
-	<tr><!-- <div class="row slider-row"> -->
-		<td><div>Loan Amount</div></td>
-		<td><div id="slider_purchasePrice" width="300px" ></div></td>
-		<td><div id="purchasePrice">{{vals.price}}</div></td>
-	</tr>
-	<tr><!-- <div class="row slider-row"> -->
-		<td><div>Amortized Over</div></td>
-		<td><div id="slider_loanLength" width="300px" ></div></td>
-		<td><div id="loanLength">{{vals.amt_years}}</div></td>
-	</tr>	
-	<tr><!-- <div class="row slider-row"> -->
-		<td><div>Mortgage</div></td>
-		<td><div id="out_mortgage">0</div></td>
-	</tr>		
-</table>
-</div> 
+
 
 <div class="container-fluid">
 <table class="table">
@@ -194,7 +225,61 @@
 {{ cocchart.as_html }}	
 </div>
 
+<br style="clear:both" /><br /><br />
 
+<h4>Make Adjustments</h4>
+<div class="container-fluid">
+<table class="table-sliders">
+	<tr>
+		<td style="text-align:right">Purchase Price</td>
+		<td><div id="slider_purchasePrice" width="300px" ></div></td>
+		<td>$<span id="purchasePrice">{{vals.price}}</span></td>
+		<td style="width:50px">&nbsp;</td>
+		<td style="text-align:right">Closing Costs</td>
+		<td><div id="slider_closingCosts" width="300px" ></div></td>
+		<td>$<span id="closingCosts">{{vals.closing_cost}}</span></td>		
+	</tr>
+	<tr>
+		<td style="text-align:right">Down Payment</td>
+		<td><div id="slider_loanDown" width="300px" ></div></td>
+		<td>$<span id="loanDown">{{vals.down}}</span></td>
+		<td>&nbsp;</td>
+		<td style="text-align:right">Repair Costs</td>
+		<td><div id="slider_repairCosts" width="300px" ></div></td>
+		<td>$<span id="repairCosts">{{vals.repair_cost}}</span></td>		
+	</tr>	
+	<tr>
+		<td style="text-align:right">Interest Rate</td>
+		<td><div id="slider_loanRate" width="300px" ></div></td>
+		<td><span id="loanRate">{{vals.loan_rate}}</span>%</td>
+		<td>&nbsp;</td>
+		<td style="text-align:right">Monthly Income</td>
+		<td><div id="slider_income" width="300px" ></div></td>
+		<td>$<span id="income">{{vals.monthly_in}}</span></td>		
+	</tr>	
+	<tr>
+		<td style="text-align:right">Amortized Over</td>
+		<td><div id="slider_loanLength" width="300px" ></div></td>
+		<td><span id="loanLength">{{vals.amt_years}}</span> years</td>
+		<td>&nbsp;</td>
+		<td style="text-align:right">Monthly Expenses</td>
+		<td><div id="slider_expenses" width="300px" ></div></td>
+		<td>$<span id="expenses">{{vals.monthly_ex}}</span></td>			
+	</tr>
+	<tr><td>&nbsp;</td></tr>
+</table>	
+<table class="table-summary1">
+	<tr class="summary1-num">
+		<td>$<span id="out_mortgage">0</span></td>
+		<td>$<span id="out_cashFlow">0</span></td>
+		<td><span id="out_coc">0</span>%</td>
+		<td>$<span id="out_cashNeeded">0</span></td>
+		<td>$<span id="out_totalPayments">0</span></td>		
+	</tr>		
+	<tr class="summary1-text"><td padding-right="10px">MORTGAGE</td><td>MONTHLY CASHFLOW</td><td>CASH ON CASH ROI</td><td>TOTAL CASH NEEDED</td><td>TOTAL MORTGAGE PAYMENTS</td></tr>
+</table>
+</div> 
+<br /><br /><br />
 
 
 {% endblock %}
